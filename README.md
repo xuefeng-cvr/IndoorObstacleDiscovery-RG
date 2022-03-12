@@ -2,4 +2,4 @@
 
 
 ## News
- - Once the manuscript is accepted, the code, dataset, and paper will be released.
+ - Once the manuscript is accepted, the code and dataset will be released.

@@ -22,8 +22,6 @@ More details about the dataset can be found in [the project page]().
 
 **Obstacle on Reflective Ground (ORG)**
 
-Please put the corresponding json files in Google Cloud Disk into ./anntoations
-
 The ORG dataset folder should have the following structure:
 <br>
 

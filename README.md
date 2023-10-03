@@ -5,6 +5,7 @@
 ### [`Paper`]() [`Project`]() [`Dataset`]() 
 
 # News
+ - 2023.10.3 This paper has been accepted by International Journal of Computer Vision (IJCV)!!!
  - 2023.4.10 The project page is about to go live.
  - 2023.4.10 Once the manuscript is accepted, the code and dataset will be fully released.
 

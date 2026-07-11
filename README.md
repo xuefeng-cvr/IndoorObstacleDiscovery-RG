@@ -12,7 +12,7 @@
     <a href="https://teacher.bupt.edu.cn/mal"><strong>Anlong Ming</strong></a>
   </p>
   <h2 align="center">IJCV 2023</h2>
-  <h3 align="center"><a href="https://link.springer.com/article/10.1007/s11263-023-01925-4">Paper</a> | <a href="https://xuefeng-cvr.github.io/IODRG">Project Page</a></h3>
+  <h3 align="center"><a href="https://link.springer.com/article/10.1007/s11263-023-01925-4">Paper</a> | <a href="https://xuefeng-cvr.github.io/IndoorObstacleDiscovery-RG/">Project Page</a></h3>
   <div align="center"></div>
 </p>
 <p align="center">
@@ -55,7 +55,7 @@ Visual obstacle discovery is a key step towards autonomous navigation of indoor 
 ## Dataset Preparation
 
 The dataset can be downloaded from this [link](https://drive.google.com/file/d/1SUjY7eHW4iPjTslXKGH523DRCe7oChHa/view?usp=sharing).
-More details about the dataset can be found in [the project page](https://xuefeng-cvr.github.io/IODRG).
+More details about the dataset can be found in [the project page](https://xuefeng-cvr.github.io/IndoorObstacleDiscovery-RG/).
 
 **Obstacle on Reflective Ground (ORG)**
 

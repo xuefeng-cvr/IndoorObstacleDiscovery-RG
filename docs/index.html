@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Indoor Obstacle Discovery on Reflective Ground via Monocular Camera</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
+    <link rel="stylesheet" href="./assets/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./assets/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./assets/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./assets/js/fontawesome.all.min.js"></script>
+    <script src="./assets/js/bulma-carousel.min.js"></script>
+    <script src="./assets/js/bulma-slider.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+
+        /* Header styling */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #B9C78D;
+            color: #fff;
+            padding: 2rem;
+        }
+
+        #logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .link-block a {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: flex-end;
+        }
+
+        .author-block {
+            display: inline-block;
+        }
+
+        nav li {
+            margin: 0 1rem;
+        }
+
+        /* Heading styling */
+        h1,
+        h2 {
+            text-align: center;
+            margin: 2rem 1rem;
+            font-weight: bold;
+            color: #2E2F23
+                /* #B9C78D; */
+        }
+
+        /* Paragraph styling */
+        p {
+            font-size: 1.2rem;
+            margin: 2rem 0;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* Code block styling */
+        pre {
+            text-justify: inter-word;
+            text-align: justify;
+            font-size: 0.8rem;
+            margin: 2rem 0;
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        /* Video container styling */
+        #video {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        #maintext {
+            margin-left: 200px;
+            margin-right: 200px;
+        }
+
+
+        #thanks {
+            text-align: justify;
+        }
+
+        iframe {
+            border: none;
+            max-width: 100%;
+        }
+
+        /* Centered content styling */
+        .center {
+            text-align: center;
+        }
+
+        /* Image styling */
+        img {
+            display: block;
+            margin: auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+        }
+
+        /* Link styling */
+        a {
+            color: hsl(0, 0%, 32%);
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: #658873;
+        }
+
+        /* Button styling */
+        button {
+            background-color: #02a828;
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #f9a602;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="logo" style="display: flex; align-items: center;">
+            <img id="painting_icon" width="10%" src="./img/ijcv_logo.png" style=" margin-right: 14px; position: relative; top: 0px;">
+            IOD - RG
+        </div>
+        <nav>
+            <ul>
+                <li><a href="https://xuefeng-cvr.github.io/">Home</a></li>
+                <li><a href="http://www.vrobotit.cn/">Laboratory</a></li>
+                <li><a href="mailto:xuefengbupt@gmail.com">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- <div style="display: flex; align-items: center; justify-content: center; margin: 0 auto"> -->
+        <!-- <img id="painting_icon" width="4%" src="./img/ijcv_logo.png" style=" margin-right: 0px; position: relative; top: 0px;"> -->
+        <!-- <h1>Indoor Obstacle Discovery</h1>
+    </div> -->
+    <h1 class="title is-3 publication-title">
+        Indoor Obstacle Discovery
+    </h1>
+
+    <h1 class="title is-4 publication-title">
+        on Reflective Ground via Monocular Camera
+    </h1>
+    <h2><b>IJCV 2023</b></h2>
+    <div id="authors" style="text-align: center; justify-content: center; font-size: 1rem;">
+        <span class="author-block">
+            <a href="https://xuefeng-cvr.github.io">Feng Xue</a><sup>1,3
+            </sup></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+        <span class="author-block">
+            <a href="">Yicong Chang</a><sup>1</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+        <span class="author-block">
+            <a href="">Tianxi Wang</a><sup>1</sup></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="author-block">
+            <a href="https://yuzhou.vlrlab.net">Yu Zhou</a><sup>2✝</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+        <span class="author-block">
+            <a href="https://teacher.bupt.edu.cn/mal">Anlong Ming</a><sup>1</sup>
+        </span>
+        <div>
+            <span class="author-block"><sup>1</sup>Beijing University of Posts and Telecommunications</span>&nbsp;&nbsp;
+            <span class="author-block"><sup>2</sup>Huazhong University of Science and Technology</span>&nbsp;&nbsp;
+            <span class="author-block"><sup>3</sup>University of Trento</span>
+        </div>
+        <div class="column is-full_width">
+            <h5>(* Work done while Feng Xue was a PHD at BUPT)</h2>
+            <h5>(✝ Corresponding Author)</h2>
+        </div>
+    </div>
+
+    <div class="column has-text-centered">
+        <div class="publication-links">
+            <!-- PDF Link. -->
+            <span class="link-block">
+                <a href="https://link.springer.com/article/10.1007/s11263-023-01925-4" target="_blank"
+                    class="button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <!-- <i class="fas fa-file-pdf"></i> -->
+                        <i class="fa fa-link"></i>
+                    </span>
+                    <span>Paper</span>
+                </a>
+            </span>
+            <span class="link-block">
+                <a href="http://arxiv.org/abs/2401.01445" target="_blank"
+                    class="button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>arXiv</span>
+                </a>
+            </span>
+            <span class="link-block">
+                <a href="https://drive.google.com/file/d/1SUjY7eHW4iPjTslXKGH523DRCe7oChHa/view?usp=sharing"
+                    target="_blank" class="button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fa fa-database"></i>
+                    </span>
+                    <span>Dataset</span>
+                </a>
+            </span>
+            <!-- <span class="link-block">
+                <a href="" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                </a>
+            </span> -->
+            <!-- Poster Link. -->
+            <!-- <span class="link-block">
+                <a href="" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fas fa-palette"></i>
+                    </span>
+                    <span>Poster</span>
+                </a>
+            </span> -->
+            <!-- Code Link. -->
+            <span class="link-block">
+                <a href="https://github.com/xuefeng-cvr/IndoorObstacleDiscovery-RG" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                </a>
+            </span>
+        </div>
+
+    </div>
+
+
+    <div id="demo" style="display: flex; justify-content: center; margin-bottom: 20px; text-align: center;">
+        <img src="img/ijcv_intro.gif" width="80%" ">
+    </div>
+
+    <p style=" text-align: center;">
+        <strong>IndoorObstacleDiscovery-RG</strong> is an approach to discover obstacles on the reflective ground using
+        spatial-temporal features.
+        </p>
+
+
+        <!-- <div id="maintext">
+            <h2>Abstract</h2>
+            <p style="font-size: 17px;">
+                Visual obstacle discovery is a key step towards autonomous navigation of indoor mobile robots.
+                Successful solutions have many applications in multiple scenes. One of the exceptions is the reflective
+                ground. In this case, the reflections on the floor resemble the true world, which confuses the obstacle
+                discovery and leaves navigation unsuccessful. We argue that the key to this problem lies in obtaining
+                discriminative features for reflections and obstacles. Note that obstacle and reflection can be
+                separated by the ground plane in 3D space. With this observation, we firstly introduce a pre-calibration
+                based ground detection scheme that uses robot motion to predict the ground plane. Due to the immunity of
+                robot motion to reflection, this scheme avoids failed ground detection caused by reflection. Given the
+                detected ground, we design a ground-pixel parallax to describe the location of a pixel relative to the
+                ground. Based on this, a unified appearance-geometry feature representation is proposed to describe
+                objects inside rectangular boxes. Eventually, based on segmenting by detection framework, an
+                appearance-geometry fusion regressor is designed to utilize the proposed feature to discover the
+                obstacles. It also prevents our model from concentrating too much on parts of obstacles instead of whole
+                obstacles. For evaluation, we introduce a new dataset for Obstacle on Reflective Ground (ORG), which
+                comprises 15 scenes with various ground reflections, a total of more than 200 image sequences and 3400
+                RGB images. The pixel-wise annotations of ground and obstacle provide a comparison to our method and
+                other methods. By reducing the misdetection of the reflection, the proposed approach outperforms others.
+            </p>
+            </p>
+        </div> -->
+
+
+
+
+        <div id="maintext">
+            <h2>Why are obstacles on the reflective ground so hard to detect? </h2>
+            <img src="./img/ijcv_question_pipeline.jpg">
+            <p>
+                The unreal objects (UOs) are usually so complicated that the existing features cannot express the
+                difference between them and obstacles,
+                e.g. the edge in the figure (a) above.
+                Hence, the UOs and obstacles are captured indiscriminately (see the figure (b) above).
+                Eventually, the UOs obtain high confidence and are mis-detected as obstacles, as shown in the figure
+                (c)(d) above.
+            </p>
+
+            <div style="overflow: hidden">
+                <h2>Is RGBD cameras effective in this scene?</h2>
+                <div style="width: 48%; float: left;">
+                    <img src="./img/ijcv_question_sensors.jpg" width="100%">
+                </div>
+                <div style="width: 50%; float: right;">
+                    <p> We evaluate <b>the usability of multi-modal sensors on reflective ground</b>.
+                        The exemplar RGBD data is visualized in the figure left.
+                        Intuitively,
+                        The structured light camera generates many void areas on the ground plane,
+                        while the stereo camera matches corresponding pixels erroneously.
+                        Clearly, both types of cameras are unsuitable for reflective ground scenes.
+                    </p>
+                </div>
+            </div>
+            <div style="height: 20px;"></div>
+
+            <h2>Can we use reflection removal methods as preprocessing?</h2>
+            <img src="./img/ijcv_question_reflection_removal.jpg" width="100%">
+            <p>
+                We evaluate the usability of two reflection removal approaches in this scene, location-aware SIRR [1]
+                and NIR[2].
+                location-aware SIRR produced confidence maps that failed to highlight the reflection,
+                and the non-reflection images were almost identical to the original RGB images.
+                Despite being free from the interface of the real world,
+                the multi-frame-based method still fails to eliminate reflections.
+                The reason is that <b>both algorithms require strong textures of main object for adequate
+                    reconstruction,
+                    but the ground texture is too weak to be perceived</b>.
+            </p>
+        </div>
+
+        <div id="maintext">
+            <h2>Method</h2>
+            <img src="./img/ijcv_pipeline.jpg">
+            <p style="font-size: 17px;">
+                ●<b>A pre-calibration based ground detection scheme</b> is introduced,
+                which uses robot motion that is immune to reflection,
+                thus avoiding detection failure.</p>
+
+            <p style="font-size: 17px;">
+                ●<b>A ground-pixel parallax</b> is introduced to form a unified appearance-geometry feature
+                representation for region
+                proposals together with appearance feature.</p>
+
+            <p style="font-size: 17px;">
+                ●<b>An appearance-geometry fusion model (AGFM)</b> is proposed to locate obstacle.
+                It also avoids the performance degradation caused by fast-moving objects and proposals too concentrated
+                on parts of obstacles.</p>
+
+        </div>
+
+    </div>
+
+    <div id="maintext">
+        <h2>Visualization results</h2>
+        <img src="./img/ijcv_visualization.jpg">
+    </div>
+
+    <div id="maintext">
+        <h1>Obstacle on Reflective Ground (ORG) Dataset</h1>
+        <h2>Overview</h2>
+        <img src="./img/ijcv_dataset.jpg">
+        The Obstacle on Reflective Ground (ORG) consists of 15 different indoor scenes and 42 types of obstacles.
+        The scenes of this dataset are mainly divided into three types:
+        <b>high contrast floor</b>,
+        <b>smooth floor</b>,
+        and <b>blurry floor</b>.
+        In these scenes,
+        the ground of each scene has varying UOs to evaluate the robustness of the algorithm.
+        Even,
+        low illumination, different patterned floor, and small obstacle also appear in this dataset.
+        In terms of the obstacle,
+        the obstacles with different sizes and materials are contained in the dataset,
+        which have low height and therefore fail to be perceived by 2D LiDAR.
+
+        <div style="overflow: hidden">
+            <h2>Details of ORG</h2>
+            <div style="width: 49%; float: left;">
+                <div style="overflow: hidden">
+                    <div style="width: 30%; float: left;">
+                        <img src="./img/ijcv_train.png" width="80px">
+                    </div>
+                    <div style="width: 70%; float: right;">
+                        <h3>Training Set</h3>
+                        <p>1,711 images / 117 videos</p>
+                    </div>
+                </div>
+                <div style="overflow: hidden">
+                    <div style="width: 30%; float: left;">
+                        <img src="./img/ijcv_test.png" width="80px">
+                    </div>
+                    <div style="width: 70%; float: right;">
+                        <h3>Test Set</h3>
+                        <p>1,709 images / 106 videos</p>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 49%; float: right;">
+                <div style="overflow: hidden">
+                    <div style="width: 30%; float: left;">
+                        <img src="./img/ijcv_camera.png" width="80px">
+                    </div>
+                    <div style="width: 70%; float: right;">
+                        <h3>Monocular Camera</h3>
+                        <p>2.8 mm Focal Length</p>
+                        <p>1920×1080 Resolution</p>
+                        <p>8 bit Pixel Size</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2>Tree Structure of ORG</h2>
+            <pre>
+└── ORG_DATASET_ROOT
+    ├── image
+        ├── test
+            ├── 19_TeachingBuilding3_F1Hall
+                ├── 001
+                    | 19_TeachingBuilding3_F1Hall_001_0000001_image.png
+                    | 19_TeachingBuilding3_F1Hall_001_0000002_image.png
+                    | ...
+                    ├── 002
+                    ├── 003
+                    ├── ...
+            ├── 20_TeachingBuilding3_F6Corridor
+            ├── 22_ParkBuilding_F1Hall
+            ├── ...
+        ├── train
+            ├── 16_ResearchBuilding_F8
+            ├── 17_ResearchBuilding_F6Corridor
+            ├── ...
+    ├── gtCoarse_Segmentation
+        ├── test
+            ├── 19_TeachingBuilding3_F1Hall
+                | 19_TeachingBuilding3_F1Hall_001_0000001_gtCoarse_labelIds.png
+                | 19_TeachingBuilding3_F1Hall_001_0000002_gtCoarse_labelIds.png
+                | ...
+            ├── 20_TeachingBuilding3_F6Corridor
+            ├── ...
+        ├── train
+    ├── odometry
+    ├── gtCoarse
+    └── timestamp
+        </pre>
+        </div>
+    </div>
+    <div id="maintext">
+        <p>
+            <b>image</b>: The RGB image of ORG dataset. <br>
+            <b>gtCoarse_Segmentation</b>: The ground truth segmentation of freespace and obstacle. <br>
+            <b>odometry</b>: The robot's odometry in each video. <br>
+            <b>timestamp</b>: The timestamp corresponding to robot's odometry. <br>
+            <b>gtCoarse</b>: The ground truth segmentation of freespace and the instance annotation of obstacle (not used in our method). <br>
+        </p>
+    </div>
+
+
+
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title">BibTeX</h2>
+            <pre><code>
+            @Article{ijcv_org,
+                title={Indoor Obstacle Discovery on Reflective Ground via Monocular Camera},
+                author={Xue, Feng and Chang, Yicong and Wang, Tianxi and Zhou, Yu and Ming, Anlong},
+                journal={International Journal of Computer Vision (IJCV)},
+                year={2023}
+            }
+        </code></pre>
+        </div>
+    </section>
+
+    <pre><code>
+[1] Dong, Z., Xu, K., Yang, Y., Bao, H., Xu, W., Lau, R.W.: Location-aware single image reflection removal. In: IEEE/CVF International Conference on Computer Vision (ICCV) (2021)
+[2] Nam, S., Brubaker, M.A., Brown, M.S.: Neural image representations for multi-image fusion and layer separation. In: S. Avidan, G. Brostow, M. Ciss ́e, G.M. Farinella, T. Hassner (eds.) Europe Conference on Computer Vision (ECCV) (2022)
+        </code></pre>
+</body>
+
+</html>
